@@ -9,7 +9,7 @@ from collections.abc import Iterable, Iterator, Sequence
 from functools import partial, reduce
 from typing import Any, Callable
 
-from multiprocess import Lock
+# multiprocess import removed for cooler-polars
 
 from ._typing import MapFunctor
 from .api import Cooler
@@ -45,7 +45,8 @@ See also:
 * <https://github.com/h5py/h5py/issues/591#issuecomment-116785660>.
 
 """
-lock = Lock()
+# Lock removed for cooler-polars - no longer needed without multiprocessing
+lock = None
 
 KeyType = Any
 
@@ -101,9 +102,8 @@ class MultiplexDataPipe:
 
     Notes
     -----
-    Python's multiprocessing module uses Pickle for serialization, which has
-    several limitations. Consider using a parallel map implementation that uses
-    a more versatile serializer, such as dill or cloudpickle.
+    NOTE: Multiprocessing has been removed in cooler-polars for better
+    memory management. Processing is now done sequentially in batches.
 
     See also
     --------
@@ -290,7 +290,7 @@ class chunkgetter:
         lo, hi = span
         chunk = {}
         try:
-            if self.use_lock:
+            if self.use_lock and lock is not None:
                 lock.acquire()
             with self.cooler.open("r") as grp:
                 if self.include_chroms:
@@ -299,7 +299,7 @@ class chunkgetter:
                     chunk["bins"] = get(grp["bins"], as_dict=True)
                 chunk["pixels"] = get(grp["pixels"], lo, hi, as_dict=True)
         finally:
-            if self.use_lock:
+            if self.use_lock and lock is not None:
                 lock.release()
         return chunk
 

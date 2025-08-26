@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import simplejson as json
 from cytoolz import compose
-from multiprocess import Pool
+# multiprocess import removed for cooler-polars
 
 from ..create import (
     HDF5Aggregator,
@@ -169,7 +169,9 @@ def hiclib(bins, pairs_path, cool_path, metadata, assembly, chunksize):
 @click.option(
     "--nproc",
     "-p",
-    help="Number of processes to split the work between.",
+    help="DEPRECATED: Number of processes to split the work between. "
+         "Multiprocessing has been removed in cooler-polars. This parameter "
+         "is ignored.",
     type=int,
     default=8,
     show_default=True,
@@ -227,40 +229,44 @@ def tabix(
         with open(metadata) as f:
             metadata = json.load(f)
 
-    try:
-        map_func = map
-        if nproc > 1:
-            pool = Pool(nproc)
-            logger.info(f"Using {nproc} cores")
-            map_func = pool.imap
-
-        opts = {}
-        if "chrom2" in kwargs:
-            opts["C2"] = kwargs["chrom2"] - 1
-        if "pos2" in kwargs:
-            opts["P2"] = kwargs["pos2"] - 1
-
-        iterator = TabixAggregator(
-            pairs_path,
-            chromsizes,
-            bins,
-            map=map_func,
-            is_one_based=(not zero_based),
-            n_chunks=max_split,
-            **opts,
+    # Issue deprecation warning for multiprocessing
+    if nproc > 1:
+        import warnings
+        warnings.warn(
+            "The 'nproc' parameter is deprecated in cooler-polars. "
+            "Multiprocessing has been removed for better memory management. "
+            "Processing will be done sequentially in batches.",
+            DeprecationWarning,
+            stacklevel=2,
         )
 
-        create_cooler(
-            cool_path,
-            bins,
-            iterator,
-            metadata=metadata,
-            assembly=assembly,
-            ordered=True,
-        )
-    finally:
-        if nproc > 1:
-            pool.close()
+    # Multiprocessing removed for cooler-polars - always use sequential processing
+    map_func = map
+
+    opts = {}
+    if "chrom2" in kwargs:
+        opts["C2"] = kwargs["chrom2"] - 1
+    if "pos2" in kwargs:
+        opts["P2"] = kwargs["pos2"] - 1
+
+    iterator = TabixAggregator(
+        pairs_path,
+        chromsizes,
+        bins,
+        map=map_func,
+        is_one_based=(not zero_based),
+        n_chunks=max_split,
+        **opts,
+    )
+
+    create_cooler(
+        cool_path,
+        bins,
+        iterator,
+        metadata=metadata,
+        assembly=assembly,
+        ordered=True,
+    )
 
 
 @register_subcommand
@@ -268,7 +274,9 @@ def tabix(
 @click.option(
     "--nproc",
     "-p",
-    help="Number of processes to split the work between.",
+    help="DEPRECATED: Number of processes to split the work between. "
+         "Multiprocessing has been removed in cooler-polars. This parameter "
+         "is ignored.",
     type=int,
     default=8,
     show_default=True,
@@ -328,34 +336,38 @@ def pairix(
         with open(metadata) as f:
             metadata = json.load(f)
 
-    try:
-        map_func = map
-        if nproc > 1:
-            pool = Pool(nproc)
-            logger.info(f"Using {nproc} cores")
-            map_func = pool.imap
-
-        iterator = PairixAggregator(
-            pairs_path,
-            chromsizes,
-            bins,
-            map=map_func,
-            is_one_based=(not zero_based),
-            n_chunks=max_split,
-            block_char=block_char,
+    # Issue deprecation warning for multiprocessing
+    if nproc > 1:
+        import warnings
+        warnings.warn(
+            "The 'nproc' parameter is deprecated in cooler-polars. "
+            "Multiprocessing has been removed for better memory management. "
+            "Processing will be done sequentially in batches.",
+            DeprecationWarning,
+            stacklevel=2,
         )
 
-        create_cooler(
-            cool_path,
-            bins,
-            iterator,
-            metadata=metadata,
-            assembly=assembly,
-            ordered=True,
-        )
-    finally:
-        if nproc > 1:
-            pool.close()
+    # Multiprocessing removed for cooler-polars - always use sequential processing
+    map_func = map
+
+    iterator = PairixAggregator(
+        pairs_path,
+        chromsizes,
+        bins,
+        map=map_func,
+        is_one_based=(not zero_based),
+        n_chunks=max_split,
+        block_char=block_char,
+    )
+
+    create_cooler(
+        cool_path,
+        bins,
+        iterator,
+        metadata=metadata,
+        assembly=assembly,
+        ordered=True,
+    )
 
 
 @register_subcommand

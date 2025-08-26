@@ -1,0 +1,4 @@
+# file: /Users/magus/work/lib/cooler-polars/cooler/src/cooler/create/_ingest.py
+# hypothesis_version: 6.138.3
+
+[100000000.0, 2147483647, '1', '2', 'C1', 'C2', 'Did not find contig ', 'Found bin ID < 0', 'P1', 'P2', '_map', 'anchor_field', 'ascii', 'bg2', 'bin1_id', 'bin2_id', 'chrms1', 'chrms2', 'chrom', 'chrom1', 'chrom2', 'chrom_field', 'chrom_id1', 'chrom_id2', 'cooler.create', 'count', 'cut1', 'cut2', 'cuts1', 'cuts2', 'decode_chroms', 'drop', 'end', 'get_linecount', 'gs', 'is_one_based', 'pairs', 'pos', 'protocol', 'r', 'raise', 'reflect', 'right', 'sided_fields', 'size', 'sort', 'start', 'suffixes', 'tril_action', 'validate', '|']

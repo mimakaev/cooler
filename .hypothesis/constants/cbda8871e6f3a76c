@@ -1,0 +1,4 @@
+# file: /Users/magus/work/lib/cooler-polars/cooler/src/cooler/cli/show.py
+# hypothesis_version: 6.138.3
+
+[0.5, 10000000.0, 100000000.0, '--balanced', '--cmap', '--dpi', '--field', '--force', '--out', '--range2', '--scale', '--zmax', '--zmin', '-b', '-f', '-o', '-r2', '-s', 'Agg', 'COOL_PATH', 'Contact matrix', 'YlOrRd', 'bin-size', 'button_release_event', 'center', 'cool_uri', 'count', 'k', 'linear', 'log10', 'log2', 'none', 'placeholders', 'prev_extent', 'range']

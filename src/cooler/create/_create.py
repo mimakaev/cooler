@@ -227,8 +227,8 @@ def write_pixels(
         DataFrames or mappings of column names to arrays.
     h5opts : dict
         HDF5 filter options.
-    lock : multiprocessing.Lock, optional
-        Optional lock to synchronize concurrent HDF5 file access.
+    lock : deprecated, optional
+        DEPRECATED: Multiprocessing locks are no longer needed in cooler-polars.
 
     """
     nnz = 0
@@ -843,8 +843,8 @@ def append(
         HDF5 dataset filter options to use (compression, shuffling,
         checksumming, etc.). Default is to use autochunking and GZIP
         compression, level 6.
-    lock : multiprocessing.Lock, optional
-        Optional lock to synchronize concurrent HDF5 file access.
+    lock : deprecated, optional
+        DEPRECATED: Multiprocessing locks are no longer needed in cooler-polars.
 
     """
     h5opts = _set_h5opts(h5opts)
@@ -965,8 +965,8 @@ _DOC_OTHER_PARAMS = """
         HDF5 dataset filter options to use (compression, shuffling,
         checksumming, etc.). Default is to use autochunking and GZIP
         compression, level 6.
-    lock : multiprocessing.Lock, optional
-        Optional lock to control concurrent access to the output file.
+    lock : deprecated, optional
+        DEPRECATED: Multiprocessing locks are no longer needed in cooler-polars.
     ensure_sorted : bool, optional
         Ensure that each input chunk is properly sorted.
     boundscheck : bool, optional

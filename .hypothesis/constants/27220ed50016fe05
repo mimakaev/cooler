@@ -1,0 +1,4 @@
+# file: /Users/magus/work/lib/cooler-polars/cooler/src/cooler/util.py
+# hypothesis_version: 6.138.3
+
+[b' ', 1000, 1000000, 10000000, 1000000000, ' or ', '([0-9,.]+)', '(\\d+)', ',', '-', '.+', '.gz', '/', '1970-01-01', ':', '::', 'COORD', 'File exists', 'G', 'GB', 'HYPHEN', 'K', 'KB', 'M', 'MB', 'O', 'OTHER', 'PATH', 'S', 'U', 'V', '^chrM$', '^chr[0-9]+$', '^chr[XY]$', '_meta', 'a', 'b', 'c', 'category', 'chrom', 'compression', 'dtype', 'end', 'f', 'foo', 'gzip', 'i', 'last', 'left', 'length', 'm', 'name', 'r', 'r+', 'right', 'start', 'u', 'w', 'w-', 'x', '|\\s*']

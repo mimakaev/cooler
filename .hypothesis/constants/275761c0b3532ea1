@@ -1,0 +1,4 @@
+# file: /Users/magus/work/lib/cooler-polars/cooler/src/cooler/cli/csort.py
+# hypothesis_version: 6.138.3
+
+['#', '-', '--buffer-size=50%', '--chrom1', '--chrom2', '--comment-char', '--flip-only', '--index', '--nproc', '--out', '--parallel=1', '--pos1', '--pos2', '--sep', '--sort-options', '--strand1', '--strand2', '--zero-based', '-0', '-c', '-c1', '-c2', '-dc', '-i', '-o', '-p', '-p1', '-p2', '-s1', '-s2', '.blksrt', '.gz', '.possrt', '.txt', '.txt.gz', 'C', 'C1', 'C2', 'CHROMOSOMES_PATH', 'Indexing...', 'LC_ALL', 'Number of processors', 'Output gzip file', 'P1', 'P2', 'PAIRS_PATH', '\\t', 'bgzip', 'cat', 'chrom2 field number', 'chromosomes_path', 'gzip', 'nt', 'pairix', 'pairs_path', 'pigz', 'pos1 field number', 'pos2 field number', 'sort', 'tabix', 'wb']

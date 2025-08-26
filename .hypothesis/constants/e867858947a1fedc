@@ -1,0 +1,4 @@
+# file: /Users/magus/work/lib/cooler-polars/cooler/src/cooler/cli/_util.py
+# hypothesis_version: 6.138.3
+
+[',', ':', ': ', '=', 'agg', 'chrom', 'dtype', 'end', 'last', 'length', 'n_cpus must be >= 1', 'name', 'start', '{', '}']

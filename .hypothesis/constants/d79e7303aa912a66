@@ -1,0 +1,4 @@
+# file: /Users/magus/work/lib/cooler-polars/cooler/src/cooler/fileops.py
+# hypothesis_version: 6.138.3
+
+['%Y-%m-%dT%H:%M:%S.%f', '+', ',', '-', '/', '0', ': ', '@attrs', 'Array', 'Dataset', 'File', 'Group', 'HDF5::MCOOL', 'HORIZONTAL', 'UP_AND_RIGHT', 'VERTICAL', 'VERTICAL_AND_RIGHT', 'bins', 'cells', 'chroms', 'cp', 'folder', 'format', 'horiz_len', 'indent', 'indexes', 'is_cooler', 'is_multires_file', 'item', 'label_space', 'list_coolers', 'ln', 'mv', 'pixels', 'r', 'r+', 'resolutions', 'shape', 'table', 'tolist', 'values', 'w', '|', '─', '│', '└', '├']

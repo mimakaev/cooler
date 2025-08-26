@@ -1,0 +1,4 @@
+# file: /Users/magus/work/lib/cooler-polars/cooler/src/cooler/cli/zoomify.py
+# hypothesis_version: 6.138.3
+
+[10000000.0, 1000, 2000, 5000, ',', '--balance', '--balance-args', '--base-uri', '--chunksize', '--field', '--legacy', '--nproc', '--out', '--resolutions', '-c', '-i', '-n', '-o', '-p', '-r', '.cool', '.mcool', '4dn', '::', '::resolutions/', 'COOL_PATH', 'Output file or URI', 'b', 'binary', 'cool_uri', 'cooler', 'count', 'end', 'n', 'nice', 'start', 'weight']

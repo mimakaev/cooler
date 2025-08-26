@@ -1,0 +1,4 @@
+# file: /Users/magus/work/lib/cooler-polars/cooler/src/cooler/create/_constants.py
+# hypothesis_version: 6.138.3
+
+['HDF5::Cooler', 'HDF5::MCOOL', 'HDF5::SCOOL', 'S', 'bin1_id', 'bin2_id', 'count']

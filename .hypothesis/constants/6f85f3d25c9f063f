@@ -1,0 +1,4 @@
+# file: /Users/magus/work/lib/cooler-polars/cooler/src/cooler/core/_rangequery.py
+# hypothesis_version: 6.138.3
+
+['__index', 'bin1_id', 'bin2_id', 'bins', 'chrom_offset', 'cooler-', 'indexes', 'left', 'right', 'start']

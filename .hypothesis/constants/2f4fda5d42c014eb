@@ -1,0 +1,4 @@
+# file: /Users/magus/work/lib/cooler-polars/cooler/src/cooler/cli/coarsen.py
+# hypothesis_version: 6.138.3
+
+[10000000.0, '--append', '--chunksize', '--factor', '--field', '--nproc', '--out', '-a', '-c', '-k', '-n', '-o', '-p', 'COOL_PATH', 'Output file or URI', 'a', 'cool_uri', 'count', 'w']
