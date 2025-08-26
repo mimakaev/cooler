@@ -8,6 +8,7 @@ from collections.abc import Iterator
 from typing import Any, Literal
 
 import h5py
+
 # multiprocess import removed for cooler-polars
 import numpy as np
 import pandas as pd
@@ -17,6 +18,7 @@ from ._typing import MapFunctor
 from ._version import __format_version_mcool__
 from .api import Cooler
 from .create import ContactBinner, create
+
 # lock import removed for cooler-polars
 from .util import GenomeSegmentation, parse_cooler_uri
 
@@ -670,8 +672,8 @@ def coarsen_cooler(
     chunksize : int
         Number of pixels processed at a time per worker.
     nproc : int, optional
-        DEPRECATED: Number of workers for batch processing of pixels. 
-        Multiprocessing has been removed in cooler-polars. This parameter 
+        DEPRECATED: Number of workers for batch processing of pixels.
+        Multiprocessing has been removed in cooler-polars. This parameter
         is ignored and will be removed in a future version. Default is 1.
     columns : list of str, optional
         Specify which pixel value columns to include in the aggregation.
@@ -701,7 +703,7 @@ def coarsen_cooler(
             DeprecationWarning,
             stacklevel=2,
         )
-    
+
     # TODO: decide whether to default to 'count' or whatever is there besides
     # bin1_id, bin2_id dtypes = dict(clr.pixels().dtypes.drop(['bin1_id', 'bin2_id']))
     clr = Cooler(base_uri)
@@ -725,7 +727,7 @@ def coarsen_cooler(
 
     # Remove any lock parameter from kwargs since we're not using multiprocessing
     kwargs.pop("lock", None)
-    
+
     iterator = CoolerCoarsener(
         base_uri,
         factor,
