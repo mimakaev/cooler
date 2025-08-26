@@ -319,9 +319,10 @@ def balance_cooler(
         / columns that sum to 1.0. The scale factor is stored in the ``stats``
         output dictionary.
     map : callable, optional
-        Map function to dispatch the matrix chunks to workers.
-        Default is the builtin ``map``, but alternatives include parallel map
-        implementations from a multiprocessing pool.
+        DEPRECATED: Map function to dispatch the matrix chunks to workers.
+        Multiprocessing has been removed in cooler-polars. This parameter
+        is ignored and will be removed in a future version.
+        Default is the builtin ``map``.
     x0 : 1D array, optional
         Initial weight vector to use. Default is to start with ones(n_bins).
     tol : float, optional
@@ -347,6 +348,25 @@ def balance_cooler(
         magnitude of the corrected matrix's marginal sum at convergence.
 
     """
+    # Issue deprecation warnings for multiprocessing parameters
+    import builtins
+    if map is not builtins.map:
+        warnings.warn(
+            "The 'map' parameter is deprecated in cooler-polars. "
+            "Multiprocessing has been removed for better memory management. "
+            "Processing will be done sequentially in batches.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+
+    if use_lock:
+        warnings.warn(
+            "The 'use_lock' parameter is deprecated in cooler-polars. "
+            "Locking is no longer needed since multiprocessing has been removed.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+
     # Divide the number of elements into non-overlapping chunks
     nnz = int(clr.info["nnz"])
     if chunksize is None:
@@ -375,7 +395,7 @@ def balance_cooler(
     if min_nnz > 0:
         filters = [_binarize, *base_filters]
         marg_nnz = (
-            split(clr, spans=spans, map=map, use_lock=use_lock)
+            split(clr, spans=spans, map=map, use_lock=False)
             .prepare(_init)
             .pipe(filters)
             .pipe(_marginalize)
@@ -385,7 +405,7 @@ def balance_cooler(
 
     filters = base_filters
     marg = (
-        split(clr, spans=spans, map=map, use_lock=use_lock)
+        split(clr, spans=spans, map=map, use_lock=False)
         .prepare(_init)
         .pipe(filters)
         .pipe(_marginalize)
@@ -420,11 +440,11 @@ def balance_cooler(
             spans,
             base_filters,
             chunksize,
-            map,
+            map,  # Always use built-in map (no multiprocessing)
             tol,
             max_iters,
             rescale_marginals,
-            use_lock,
+            False,  # Always use_lock=False (no locking needed)
         )
     elif trans_only:
         bias, scale, var = _balance_transonly(
@@ -433,11 +453,11 @@ def balance_cooler(
             spans,
             base_filters,
             chunksize,
-            map,
+            map,  # Always use built-in map (no multiprocessing)
             tol,
             max_iters,
             rescale_marginals,
-            use_lock,
+            False,  # Always use_lock=False (no locking needed)
         )
     else:
         bias, scale, var = _balance_genomewide(
@@ -446,11 +466,11 @@ def balance_cooler(
             spans,
             base_filters,
             chunksize,
-            map,
+            map,  # Always use built-in map (no multiprocessing)
             tol,
             max_iters,
             rescale_marginals,
-            use_lock,
+            False,  # Always use_lock=False (no locking needed)
         )
 
     stats = {
