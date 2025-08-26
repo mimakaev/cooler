@@ -1,0 +1,4 @@
+# file: /Users/magus/work/lib/cooler-polars/cooler/src/cooler/create/_create.py
+# hypothesis_version: 6.138.3
+
+[200, 1000000, 20000000, '-', '.multi.cool', '/', '/chroms/name', '::', '::/cells/', 'Standard', 'User', 'Writing bins', 'Writing chroms', 'Writing indexes', 'Writing info', 'Writing pixels', 'a', 'bin-size', 'bin-type', 'bin1_id', 'bin1_offset', 'bin2_id', 'bins', 'bins/chrom', 'bins/end', 'bins/start', 'chrom', 'chrom_offset', 'chroms', 'chroms/name', 'chunks', 'compression', 'compression_opts', 'cooler-', 'cooler.create', 'count', 'creation-date', 'dtype', 'end', 'enum_path', 'fillvalue', 'fixed', 'fletcher32', 'format', 'format-url', 'format-version', 'generated-by', 'genome-assembly', 'gzip', 'indexes', 'length', 'maxshape', 'metadata', 'name', 'nbins', 'ncells', 'nchroms', 'nnz', 'nt', 'null', 'pixels', 'r+', 'scaleoffset', 'shuffle', 'square', 'start', 'storage-mode', 'sum', 'symmetric-upper', 'track_times', 'unknown', 'variable', 'w']

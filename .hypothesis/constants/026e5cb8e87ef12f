@@ -1,0 +1,4 @@
+# file: /Users/magus/work/lib/cooler-polars/cooler/src/cooler/cli/makebins.py
+# hypothesis_version: 6.138.3
+
+['--header', '--out', '--rel-ids', '-H', '-i', '-o', '0', '1', 'BINSIZE', 'CHROMSIZES_PATH', 'binsize', 'chrom', 'chromsizes', 'id', 'w']

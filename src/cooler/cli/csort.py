@@ -199,7 +199,10 @@ def make_index_command(index, fields, zero_based, outfile):
     show_default=True,
 )
 @click.option(
-    "--nproc", "-p", help="Number of processors", type=int, default=8, show_default=True
+    "--nproc", "-p", 
+    help="DEPRECATED: Number of processors. Multiprocessing has been removed "
+         "in cooler-polars. This parameter is ignored.", 
+    type=int, default=8, show_default=True
 )
 @click.option(
     "--zero-based",
@@ -328,11 +331,23 @@ def csort(
     else:
         outfile = out
 
+    # Issue deprecation warning for multiprocessing
+    if nproc > 1:
+        import warnings
+        warnings.warn(
+            "The 'nproc' parameter is deprecated in cooler-polars. "
+            "Multiprocessing has been removed for better memory management. "
+            "Sort parallelization will use system defaults.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+
     # Parse extra sort options and determine if sort supports --parallel option
     if sort_options is not None:
         sort_options = shlex.split(sort_options)
     elif _has_parallel_sort():
-        sort_options = [f"--parallel={nproc}", "--buffer-size=50%"]
+        # Use built-in sort parallelization instead of nproc parameter
+        sort_options = ["--parallel=8", "--buffer-size=50%"]
     else:
         sort_options = []
 

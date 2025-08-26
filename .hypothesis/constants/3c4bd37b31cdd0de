@@ -1,0 +1,4 @@
+# file: /Users/magus/work/lib/cooler-polars/cooler/src/cooler/cli/digest.py
+# hypothesis_version: 6.138.3
+
+['*.fa', '*.fasta', '--header', '--out', '--rel-ids', '-H', '-i', '-o', '0', '1', 'CHROMSIZES_PATH', 'ENZYME', 'FASTA_PATH', 'chrom', 'chromsizes', 'enzyme', 'fasta', 'id', 'w']

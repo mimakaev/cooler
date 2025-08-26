@@ -1,0 +1,4 @@
+# file: /Users/magus/work/lib/cooler-polars/cooler/src/cooler/cli/merge.py
+# hypothesis_version: 6.138.3
+
+[20000000.0, '--append', '--chunksize', '--field', '-a', '-c', 'a', 'count', 'in_paths', 'out_path', 'w']

@@ -1,0 +1,4 @@
+# file: /Users/magus/work/lib/cooler-polars/cooler/src/cooler/_reduce.py
+# hypothesis_version: 6.138.3
+
+[256, 1000, 2000, 5000, 10000, 25000, 50000, 100000, 250000, 500000, 1000000, 2500000, 5000000, 10000000, ' bin size: ', '/bins', '/chroms', '/indexes', '::', 'Bin size: ', 'HDF5::MCOOL', 'Merging:\n{}', 'Zoom level: ', 'append', 'bin1_id', 'bin2_id', 'binary', 'chrom', 'chrom1', 'chrom2', 'coarsen_cooler', 'count', 'end', 'format', 'format-version', 'genome-assembly', 'indexes/bin1_offset', 'indexes/chrom_offset', 'lock', 'max-zoom', 'max-zooms', 'merge_coolers', 'nice', 'r', 'r+', 'right', 'start', 'start1', 'start2', 'sum', 'symmetric-upper', 'w', 'zoomify_cooler']

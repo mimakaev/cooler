@@ -6,7 +6,7 @@ from contextlib import contextmanager
 from functools import wraps
 
 import click
-import multiprocess as mp
+import os as _os  # multiprocess import removed for cooler-polars
 import numpy as np
 import pandas as pd
 
@@ -149,7 +149,8 @@ def check_ncpus(arg_value):
     if arg_value <= 0:
         raise click.BadParameter("n_cpus must be >= 1")
     else:
-        return min(arg_value, mp.cpu_count())
+        # multiprocess removed for cooler-polars - use os.cpu_count instead
+        return min(arg_value, _os.cpu_count() or 1)
 
 
 @contextmanager

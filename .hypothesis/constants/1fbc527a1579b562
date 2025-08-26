@@ -1,0 +1,4 @@
+# file: /Users/magus/work/lib/cooler-polars/cooler/src/cooler/_typing.py
+# hypothesis_version: 6.138.3
+
+['GenomicRangeTuple', 'MapFunctor', 'T', 'Tabular', 'U']

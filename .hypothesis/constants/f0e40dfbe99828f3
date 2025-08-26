@@ -1,0 +1,4 @@
+# file: /Users/magus/work/lib/cooler-polars/cooler/src/cooler/__init__.py
+# hypothesis_version: 6.138.3
+
+['Cooler', '__format_version__', '__version__', 'annotate', 'balance_cooler', 'binnify', 'coarsen_cooler', 'create_cooler', 'create_scool', 'fetch_chromsizes', 'fileops', 'get_verbosity_level', 'merge_coolers', 'parallel', 'read_chromsizes', 'rename_chroms', 'set_verbosity_level', 'zoomify_cooler']

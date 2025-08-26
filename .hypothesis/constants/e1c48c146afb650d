@@ -1,0 +1,4 @@
+# file: /Users/magus/work/lib/cooler-polars/cooler/src/cooler/cli/balance.py
+# hypothesis_version: 6.138.3
+
+[1e-05, 10000000.0, 200, 1024, '%g', '--blacklist', '--check', '--chunksize', '--cis-only', '--convergence-policy', '--force', '--ignore-diags', '--ignore-dist', '--mad-max', '--max-iters', '--min-count', '--min-nnz', '--name', '--nproc', '--stdout', '--tol', '--trans-only', '-c', '-f', '-p', 'COOL_PATH', 'bins', 'chrom', 'compression', 'compression_opts', 'converged', 'cool_uri', 'discard', 'end', 'error', 'gzip', 'r', 'r+', 'start', 'store_final', 'store_nan', 'weight']

@@ -1,0 +1,4 @@
+# file: /Users/magus/work/lib/cooler-polars/cooler/src/cooler/cli/dump.py
+# hypothesis_version: 6.138.3
+
+[1000000, '%', ',', '-', '--annotate', '--chunksize', '--columns', '--fill-lower', '--float-format', '--header', '--join', '--na-rep', '--one-based-ids', '--one-based-starts', '--out', '--range', '--range2', '--table', '-H', '-b', '-c', '-f', '-k', '-o', '-r', '-r2', '-t', '.gz', 'COOL_PATH', 'balanced', 'bin1_id', 'bin2_id', 'bins', 'chrom', 'chroms', 'cool_uri', 'count', 'end', 'g', 'indexes/bin1_offset', 'pixels', 'r', 'start', 'start1', 'start2', 'symmetric-upper', 'w', 'weight', 'weight1', 'weight2', 'wt']

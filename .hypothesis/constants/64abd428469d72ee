@@ -1,0 +1,4 @@
+# file: /Users/magus/work/lib/cooler-polars/cooler/src/cooler/core/__init__.py
+# hypothesis_version: 6.138.3
+
+['CSRReader', 'DirectRangeQuery2D', 'RangeSelector1D', 'RangeSelector2D', 'delete', 'get', 'put', 'region_to_extent', 'region_to_offset']

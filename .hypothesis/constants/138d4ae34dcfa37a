@@ -1,0 +1,4 @@
+# file: /Users/magus/work/lib/cooler-polars/cooler/src/cooler/cli/fileops.py
+# hypothesis_version: 6.138.3
+
+['--level', '--long', '--overwrite', '--soft', '-L', '-l', '-s', '-w', '::', 'COOL_PATH', 'Long listing format', 'cool_path', 'dst_uri', 'src_uri', 'uri']

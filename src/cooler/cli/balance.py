@@ -252,6 +252,7 @@ def balance(
         rescale_marginals=True,
         use_lock=False,
         map=map,  # Always use built-in map (no multiprocessing)
+        store=False,  # We handle storage manually below
     )
 
     if not np.all(stats["converged"]):
@@ -273,6 +274,7 @@ def balance(
             sys.stdout, header=False, index=False, na_rep="", float_format="%g"
         )
     else:
+        # Store the balancing weights to the file
         with h5py.File(cool_path, "r+") as h5:
             grp = h5[group_path]
             # add the bias column to the file

@@ -1,0 +1,4 @@
+# file: /Users/magus/work/lib/cooler-polars/cooler/src/cooler/_logging.py
+# hypothesis_version: 6.138.3
+
+['%Y-%m-%d %I:%M:%S %p', 'a', 'b', 'backslashreplace', 'cli', 'cooler', 'encoding', 'errors', 'lib', 'mode', 'utf-8', '{', '{message}']

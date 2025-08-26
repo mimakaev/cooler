@@ -1,0 +1,4 @@
+# file: /Users/magus/work/lib/cooler-polars/cooler/src/cooler/_balance.py
+# hypothesis_version: 6.138.3
+
+[0.0, 1e-05, 1.0, 200, 10000000, 'balance_cooler', 'bin1_id', 'bin2_id', 'bins', 'chrom', 'cis_only', 'compression', 'compression_opts', 'converged', 'count', 'divisive_weights', 'gzip', 'ignore_diags', 'indexes/bin1_offset', 'indexes/chrom_offset', 'mad_max', 'min_count', 'min_nnz', 'name', 'nbins', 'nnz', 'pixels', 'r+', 'scale', 'tol', 'var', 'weight']

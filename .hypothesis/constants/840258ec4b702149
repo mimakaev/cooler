@@ -1,0 +1,4 @@
+# file: /Users/magus/work/lib/cooler-polars/cooler/src/cooler/cli/cload.py
+# hypothesis_version: 6.138.3
+
+[100000000.0, 200, 15000000, '#', '-', '--append', '--assembly', '--block-char', '--chrom1', '--chrom2', '--chunksize', '--comment-char', '--field', '--input-copy-status', '--max-merge', '--max-split', '--mergebuf', '--metadata', '--no-delete-temp', '--no-symmetric-upper', '--nproc', '--pos1', '--pos2', '--storage-options', '--temp-dir', '--zero-based', '-0', '-N', '-a', '-c', '-c1', '-c2', '-p', '-p1', '-p2', '-s', '.', 'BINS', 'C2', 'COOL_PATH', 'P2', 'PAIRS_PATH', 'a', 'bin1_id', 'bin2_id', 'bins', 'buffer', 'chrom1', 'chrom2', 'cool_path', 'count', 'drop', 'duplex', 'infer', 'pairs', 'pairs_path', 'peek', 'pos1', 'pos2', 'r', 'reflect', 'sum', 'unique', 'w', '|']

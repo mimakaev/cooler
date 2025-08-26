@@ -1,0 +1,4 @@
+# file: /Users/magus/work/lib/cooler-polars/cooler/src/cooler/cli/__init__.py
+# hypothesis_version: 6.138.3
+
+['--debug', '--help', '--verbose', '--version', '-V', '-d', '-h', '-v', 'Verbose logging.', '_', 'as_dict', 'children', 'cli', 'cmdline', 'connections', 'cpu_affinity', 'cpu_num', 'cpu_percent', 'cpu_times', 'create_time', 'cwd', 'environ', 'exe', 'gids', 'help_option_names', 'io_counters', 'ionice', 'is_running', 'kill', 'memory_full_info', 'memory_info', 'memory_info_ex', 'memory_maps', 'memory_percent', 'name', 'nice', 'num_ctx_switches', 'num_fds', 'num_threads', 'oneshot', 'open_files', 'parent', 'parents', 'pid', 'ppid', 'resume', 'rlimit', 'send_signal', 'status', 'suspend', 'terminal', 'terminate', 'uids', 'username', 'wait']
