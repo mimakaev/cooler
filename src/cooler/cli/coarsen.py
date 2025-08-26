@@ -1,9 +1,8 @@
-import os.path as op
-
 import click
 
 from .._reduce import coarsen_cooler
-from ..parallel import lock
+
+# lock import removed for cooler-polars
 from ..util import parse_cooler_uri
 from . import cli
 from ._util import parse_field_param
@@ -24,8 +23,9 @@ from ._util import parse_field_param
     "--nproc",
     "-n",
     "-p",
-    help="Number of processes to use for batch processing chunks of pixels "
-    "[default: 1, i.e. no process pool]",
+    help="DEPRECATED: Number of processes to use for batch processing chunks of "
+    "pixels. Multiprocessing has been removed in cooler-polars. This parameter "
+    "is ignored. [default: 1, i.e. no process pool]",
     default=1,
     type=int,
 )
@@ -67,7 +67,7 @@ def coarsen(cool_uri, factor, nproc, chunksize, field, out, append):
     """
     infile, _ = parse_cooler_uri(cool_uri)
     outfile, _ = parse_cooler_uri(out)
-    same_file = op.realpath(infile) == op.realpath(outfile)
+    # same_file variable removed since lock is no longer used
 
     if len(field):
         field_specifiers = [
@@ -90,6 +90,6 @@ def coarsen(cool_uri, factor, nproc, chunksize, field, out, append):
         columns=columns,
         dtypes=dtypes,
         agg=agg,
-        lock=lock if same_file else None,
+        # lock parameter removed for cooler-polars
         mode="a" if append else "w",
     )
