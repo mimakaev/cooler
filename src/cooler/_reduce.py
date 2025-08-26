@@ -8,7 +8,7 @@ from collections.abc import Iterator
 from typing import Any, Literal
 
 import h5py
-import multiprocess as mp
+# multiprocess import removed for cooler-polars
 import numpy as np
 import pandas as pd
 
@@ -17,7 +17,7 @@ from ._typing import MapFunctor
 from ._version import __format_version_mcool__
 from .api import Cooler
 from .create import ContactBinner, create
-from .parallel import lock
+# lock import removed for cooler-polars
 from .util import GenomeSegmentation, parse_cooler_uri
 
 __all__ = ["coarsen_cooler", "merge_coolers", "zoomify_cooler"]
@@ -627,17 +627,14 @@ class CoolerCoarsener(ContactBinner):
         return chunk
 
     def __iter__(self) -> Iterator[dict[str, np.ndarray]]:
-        # Distribute batches of `batchsize` pixel spans at once.
+        # Process spans sequentially in batches for memory efficiency
+        # (multiprocessing removed in cooler-polars)
         batchsize = self.batchsize
         spans = list(zip(self.edges[:-1], self.edges[1:]))
         for i in range(0, len(spans), batchsize):
-            try:
-                if batchsize > 1:
-                    lock.acquire()
-                results = self._map(self.aggregate, spans[i : i + batchsize])
-            finally:
-                if batchsize > 1:
-                    lock.release()
+            # Sequential processing - no need for locks or multiprocessing
+            batch_spans = spans[i : i + batchsize]
+            results = [self.aggregate(span) for span in batch_spans]
             for df in results:
                 yield {k: v.values for k, v in df.items()}
 
@@ -673,8 +670,9 @@ def coarsen_cooler(
     chunksize : int
         Number of pixels processed at a time per worker.
     nproc : int, optional
-        Number of workers for batch processing of pixels. Default is 1,
-        i.e. no process pool.
+        DEPRECATED: Number of workers for batch processing of pixels. 
+        Multiprocessing has been removed in cooler-polars. This parameter 
+        is ignored and will be removed in a future version. Default is 1.
     columns : list of str, optional
         Specify which pixel value columns to include in the aggregation.
         Default is to use all available value columns.
@@ -694,6 +692,16 @@ def coarsen_cooler(
     cooler.merge_coolers
 
     """
+    # Issue deprecation warning for multiprocessing
+    if nproc > 1:
+        warnings.warn(
+            "The 'nproc' parameter is deprecated in cooler-polars. "
+            "Multiprocessing has been removed for better memory management. "
+            "Processing will be done sequentially in batches.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+    
     # TODO: decide whether to default to 'count' or whatever is there besides
     # bin1_id, bin2_id dtypes = dict(clr.pixels().dtypes.drop(['bin1_id', 'bin2_id']))
     clr = Cooler(base_uri)
@@ -715,38 +723,31 @@ def coarsen_cooler(
         else:
             dtypes.setdefault(col, input_dtypes[col])
 
-    try:
-        # Note: fork before opening to prevent inconsistent global HDF5 state
-        if nproc > 1:
-            pool = mp.Pool(nproc)
-            kwargs.setdefault("lock", lock)
+    # Remove any lock parameter from kwargs since we're not using multiprocessing
+    kwargs.pop("lock", None)
+    
+    iterator = CoolerCoarsener(
+        base_uri,
+        factor,
+        chunksize,
+        columns=columns,
+        agg=agg,
+        batchsize=1,  # Always use sequential processing for better memory management
+        map=map,  # Always use built-in map (no multiprocessing)
+    )
 
-        iterator = CoolerCoarsener(
-            base_uri,
-            factor,
-            chunksize,
-            columns=columns,
-            agg=agg,
-            batchsize=nproc,
-            map=pool.map if nproc > 1 else map,
-        )
+    new_bins = iterator.new_bins
 
-        new_bins = iterator.new_bins
+    kwargs.setdefault("append", True)
 
-        kwargs.setdefault("append", True)
-
-        create(
-            output_uri,
-            new_bins,
-            iterator,
-            dtypes=dtypes,
-            symmetric_upper=clr.storage_mode == "symmetric-upper",
-            **kwargs,
-        )
-
-    finally:
-        if nproc > 1:
-            pool.close()
+    create(
+        output_uri,
+        new_bins,
+        iterator,
+        dtypes=dtypes,
+        symmetric_upper=clr.storage_mode == "symmetric-upper",
+        **kwargs,
+    )
 
 
 def zoomify_cooler(
