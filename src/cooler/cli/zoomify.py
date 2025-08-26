@@ -11,7 +11,8 @@ from .._reduce import (
     preferred_sequence,
     zoomify_cooler,
 )
-from ..parallel import lock
+
+# lock import removed for cooler-polars
 from ..util import parse_cooler_uri
 from . import cli, get_logger
 from ._util import parse_field_param
@@ -52,8 +53,9 @@ def invoke_balance(args, resolutions, outfile):
     "--nproc",
     "-n",
     "-p",
-    help="Number of processes to use for batch processing chunks of pixels "
-    "[default: 1, i.e. no process pool]",
+    help="DEPRECATED: Number of processes to use for batch processing chunks of "
+    "pixels. Multiprocessing has been removed in cooler-polars. This parameter "
+    "is ignored. [default: 1, i.e. no process pool]",
     default=1,
     type=int,
 )
@@ -142,7 +144,7 @@ def zoomify(
 
     if legacy:
         n_zooms, zoom_levels = legacy_zoomify(
-            cool_uri, outfile, nproc, chunksize, lock=lock
+            cool_uri, outfile, nproc, chunksize
         )
 
         if balance:
@@ -237,7 +239,7 @@ def zoomify(
             resolutions,
             chunksize,
             nproc=nproc,
-            lock=lock,
+            # lock parameter removed for cooler-polars
             columns=columns,
             dtypes=dtypes,
             agg=agg,
