@@ -4,8 +4,8 @@ import click
 import h5py
 import numpy as np
 import pandas as pd
-from multiprocess import Pool
 
+# multiprocess import removed for cooler-polars
 from .._balance import balance_cooler
 from ..api import Cooler
 from ..util import bedslice, parse_cooler_uri
@@ -79,7 +79,9 @@ from . import cli, get_logger
 @click.option(
     "--nproc",
     "-p",
-    help="Number of processes to split the work between.",
+    help="DEPRECATED: Number of processes to split the work between. "
+         "Multiprocessing has been removed in cooler-polars. This parameter "
+         "is ignored.",
     type=int,
     default=8,
     show_default=True,
@@ -234,33 +236,23 @@ def balance(
     if ignore_dist is not None:
         ignore_diags = max(ignore_diags, int(np.ceil(ignore_dist / clr.binsize)))
 
-    try:
-        if nproc > 1:
-            pool = Pool(nproc)
-            map_ = pool.imap_unordered
-        else:
-            map_ = map
-
-        bias, stats = balance_cooler(
-            clr,
-            chunksize=chunksize,
-            cis_only=cis_only,
-            trans_only=trans_only,
-            tol=tol,
-            min_nnz=min_nnz,
-            min_count=min_count,
-            blacklist=bad_bins,
-            mad_max=mad_max,
-            max_iters=max_iters,
-            ignore_diags=ignore_diags,
-            rescale_marginals=True,
-            use_lock=False,
-            map=map_,
-        )
-
-    finally:
-        if nproc > 1:
-            pool.close()
+    # Multiprocessing removed for cooler-polars - always use sequential processing
+    bias, stats = balance_cooler(
+        clr,
+        chunksize=chunksize,
+        cis_only=cis_only,
+        trans_only=trans_only,
+        tol=tol,
+        min_nnz=min_nnz,
+        min_count=min_count,
+        blacklist=bad_bins,
+        mad_max=mad_max,
+        max_iters=max_iters,
+        ignore_diags=ignore_diags,
+        rescale_marginals=True,
+        use_lock=False,
+        map=map,  # Always use built-in map (no multiprocessing)
+    )
 
     if not np.all(stats["converged"]):
         logger.error("Iteration limit reached without convergence")
