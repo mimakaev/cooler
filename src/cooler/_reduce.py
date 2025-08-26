@@ -783,8 +783,9 @@ def zoomify_cooler(
     chunksize : int
         Number of pixels processed at a time per worker.
     nproc : int, optional
-        Number of workers for batch processing of pixels. Default is 1,
-        i.e. no process pool.
+        DEPRECATED: Number of workers for batch processing of pixels.
+        Multiprocessing has been removed in cooler-polars. This parameter
+        is ignored and will be removed in a future version. Default is 1.
     columns : list of str, optional
         Specify which pixel value columns to include in the aggregation.
         Default is to use only the column named 'count' if it exists.
@@ -804,6 +805,16 @@ def zoomify_cooler(
     cooler.merge_coolers
 
     """
+    # Issue deprecation warning for multiprocessing
+    if nproc > 1:
+        warnings.warn(
+            "The 'nproc' parameter is deprecated in cooler-polars. "
+            "Multiprocessing has been removed for better memory management. "
+            "Processing will be done sequentially in batches.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+
     # TODO: provide presets? {'pow2', '4dn'}
     if isinstance(base_uris, str):
         base_uris = [base_uris]
